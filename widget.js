@@ -11,12 +11,12 @@ class Bar {
         this.message = properties.message;
         this.position = properties.position;
 
-        const body = document.querySelector('body');
-        const bar = document.createElement('div');
-        const showBarBtn = document.createElement('button');
+        this.body = document.querySelector('body');
+        this.bar = document.createElement('div');
+        this.showBarBtn = document.createElement('button');
 
-        this.addShowBarBtn(showBarBtn, body);
-        this.addBar(bar, body)
+        this.addShowBarBtn(this.showBarBtn, this.body);
+        this.addBar(this.bar, this.body)
     }
 
     addShowBarBtn(showBarBtn, place) {
@@ -38,21 +38,20 @@ class Bar {
         showBarBtn.style.cursor = "pointer";
         //Button styles end
 
-        showBarBtn.addEventListener('click', () => {
-
-        })
+        showBarBtn.addEventListener('click', this.showBar)
 
         place.appendChild(showBarBtn);
     }
 
     addBar = (bar, place) => {
+        const barHeight = 50;
         //position bar START
-        bar.style.position = 'absolute';
+        bar.style.position = 'fixed';
         bar.style.left = '0';
         if (this.position === 'top') {
-            bar.style.top = '0';
+            bar.style.top = `${-barHeight}px`;
         } else if (this.position === 'bottom') {
-            bar.style.bottom = '0';
+            bar.style.bottom = `${-barHeight}px`;
         }
         //position bar END
         // bar styles START
@@ -60,13 +59,15 @@ class Bar {
         bar.style.padding = `0 ${barPadding}`;
         bar.style.boxSizing = "border-box";
         bar.style.width = '100%';
-        bar.style.height = '50px';
+        bar.style.height = `${barHeight}px`;
         bar.style.backgroundColor = '#2c3e50';
         bar.style.fontFamily = 'Arial, sans-serif';
         bar.style.color = '#FFF';
         bar.style.display = "flex";
         bar.style.alignItems = "center";
         bar.style.justifyContent = "center";
+
+        bar.style.transition = 'top .3s, bottom .3s';
         // bar styles END
 
         //text element START
@@ -97,11 +98,29 @@ class Bar {
         closeBtn.style.cursor = 'pointer';
         closeBtn.style.position = 'absolute';
         closeBtn.style.right = `${barPadding}`
+
+        closeBtn.addEventListener('click', () => this.hideBar(barHeight))
         //close btn END
 
         bar.appendChild(textEl);
         bar.appendChild(getWidgetsBtn);
         bar.appendChild(closeBtn);
         place.appendChild(bar);
+    }
+
+    showBar = () => {
+        if (this.position === 'top') {
+            this.bar.style.top = '0';
+        } else {
+            this.bar.style.bottom = '0';
+        }
+    }
+
+    hideBar = (barHeight) => {
+        if (this.position === 'top') {
+            this.bar.style.top = `${-barHeight}px`;
+        } else {
+            this.bar.style.bottom = `${-barHeight}px`;
+        }
     }
 }
