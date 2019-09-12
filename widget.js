@@ -1,7 +1,7 @@
 class Bar {
     constructor(properties) {
         if (!properties.message || !properties.position) {
-            throw new Error('Bar initialization needs a object with message and position property');
+            throw new Error('Bar initialization needs object with message and position property');
         }
 
         if (properties.position !== 'top' && properties.position !== 'bottom') {
@@ -36,14 +36,25 @@ class Bar {
         showBarBtn.style.border = "4px solid #888"
         showBarBtn.style.borderRadius = "50%"
         showBarBtn.style.cursor = "pointer";
+        showBarBtn.style.transition = '.3s';
         //Button styles end
 
         showBarBtn.addEventListener('click', this.showBar)
 
+        showBarBtn.addEventListener('mouseover', (e) => {
+            e.target.style.backgroundColor = '#888';
+            e.target.style.color = '#fff';
+        })
+
+        showBarBtn.addEventListener('mouseleave', (e) => {
+            e.target.style.backgroundColor = '#fff';
+            e.target.style.color = '#888';
+        })
+
         place.appendChild(showBarBtn);
     }
 
-    addBar = (bar, place) => {
+    addBar = (bar) => {
         const barHeight = 50;
         //position bar START
         bar.style.position = 'fixed';
@@ -86,9 +97,18 @@ class Bar {
         getWidgetsBtn.style.padding = '.5em 1em';
         getWidgetsBtn.style.cursor = 'pointer';
         getWidgetsBtn.style.margin = " 0 1em";
+        getWidgetsBtn.style.transition = 'background-Color .3s';
 
         // customizable callback function
         getWidgetsBtn.addEventListener('click', () => this.showMessage())
+
+        getWidgetsBtn.addEventListener('mouseover', (e) => {
+            e.target.style.backgroundColor = '#f3ad24';
+        })
+
+        getWidgetsBtn.addEventListener('mouseleave', (e) => {
+            e.target.style.backgroundColor = '#f39c12';
+        })
         //get widgets btn END
 
         //close btn START
@@ -100,15 +120,24 @@ class Bar {
         closeBtn.style.backgroundColor = 'transparent';
         closeBtn.style.cursor = 'pointer';
         closeBtn.style.position = 'absolute';
-        closeBtn.style.right = `${barPadding}`
+        closeBtn.style.right = `${barPadding}`;
+        closeBtn.style.transition = 'color .3s';
 
         closeBtn.addEventListener('click', () => this.hideBar(barHeight))
+
+        closeBtn.addEventListener('mouseover', (e) => {
+            e.target.style.color = '#f3ad24';
+        })
+
+        closeBtn.addEventListener('mouseleave', (e) => {
+            e.target.style.color = '#FFF';
+        })
         //close btn END
 
         bar.appendChild(textEl);
         bar.appendChild(getWidgetsBtn);
         bar.appendChild(closeBtn);
-        place.appendChild(bar);
+        this.body.appendChild(bar);
     }
 
     showBar = () => {
