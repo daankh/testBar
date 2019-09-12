@@ -5,12 +5,12 @@ Customizable widget built using clear JavaScript.
  * JavaScript (ECMAScript 6)
  * HTML
 
-# widget.js file includes
+# The widget.js file includes
 * class Bar implementation
 
 # External Iinterface
 
-* Widget consist of bar and button to show this bar.
+* Widget consists of bar and button to show this bar.
 * All buttons have hover effect.
 * Show bar button is centered.
 * Bar includes message, get widgets button and close button.
@@ -36,10 +36,15 @@ Customizable widget built using clear JavaScript.
     </script>
  ```
  * Class Bar needs an object with two properties: message and position in its constructor. 
- * Message property is responsible for bar's text. Its value can be anything. 
+ * Message property is responsible for bar's text. Its value can be anything, but string is the best choice. 
  * Position property accepts two values - top or bottom. Anything else returnes an error. If you set top - bar shows at the top of the page. If you set bottom - bar shows at the bottom of the page.
 
  ## If you want make some changes
 
- * all styles are applied this in widget.js file.
- * Show-bar-button styles are in its creation function named addShowBarBtn.
+ * All styles are applied this in widget.js file, so you can change them there.
+ * Show bar button styles are included in function named addShowBarBtn.
+ * Bar styles and its children (message, get widgets button and close button) are included in addBar function.
+ * You can change behaviour of get widgets button, when its clicked, writing callback function as a parameter of showMessage() function.
+ ```
+getWidgetsBtn.addEventListener('click', () => this.showMessage(callback))
+ ```
