@@ -86,6 +86,9 @@ class Bar {
         getWidgetsBtn.style.padding = '.5em 1em';
         getWidgetsBtn.style.cursor = 'pointer';
         getWidgetsBtn.style.margin = " 0 1em";
+
+        // customizable callback function
+        getWidgetsBtn.addEventListener('click', () => this.showMessage())
         //get widgets btn END
 
         //close btn START
@@ -122,5 +125,9 @@ class Bar {
         } else {
             this.bar.style.bottom = `${-barHeight}px`;
         }
+    }
+
+    showMessage = (callback = () => window.alert('hello world')) => {
+        return callback()
     }
 }
