@@ -1,5 +1,13 @@
 class Bar {
     constructor(properties) {
+        if (!properties.message || !properties.position) {
+            throw new Error('Bar initialization needs a object with message and position property');
+        }
+
+        if (properties.position !== 'top' && properties.position !== 'bottom') {
+            throw new Error('Bar position must be top or bottom');
+        }
+
         this.message = properties.message;
         this.position = properties.position;
 
@@ -29,6 +37,10 @@ class Bar {
         showBarBtn.style.borderRadius = "50%"
         showBarBtn.style.cursor = "pointer";
         //Button styles end
+
+        showBarBtn.addEventListener('click', () => {
+
+        })
 
         place.appendChild(showBarBtn);
     }
